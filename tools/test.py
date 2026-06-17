@@ -1,48 +1,32 @@
 
+from typing import List
 
-import copy
-import random
+def exclusiveTime(n: int, logs: List[str]) -> List[int]:
+    exclusive_times = [0] * n
+    call_stack = []
 
-# reminding myself how defaultdict from collections works
+    for log in logs:
+        log_id, action, time = log.split(":")
+        log_id, time = int(log_id), int(time)
 
-# a = set([1,2,3,4])
-# print(a)
+        if action == "start":
+            if call_stack:
+                previous_function = call_stack[-1]
+                previous_function[2] += time-previous_function[1]
+            call_stack.append([log_id, time, 0])
 
-# b = set([3,4,5,6])
-# print(b)
+        else: # if action is "end", previous log should be the start of the same function
+            previous_function = call_stack.pop()
+            previous_function[2] += time-previous_function[1]
+            exclusive_times[log_id] += previous_function[2]+1
 
-# c = a.union(b)
-# print(c)
+            if call_stack:
+                call_stack[-1][1] = time+1
 
-
-# original = [[1, 2], [3, 4]]
-# shallow = original
-# deep = copy.deepcopy(original)
-
-# print("original:", id(original))
-# print("shallow:", id(shallow))
-# print("deep:", id(deep))
-# print()
-# print("original:", id(original[0]))
-# print("shallow:", id(shallow[0]))
-# print("deep:", id(deep[0]))
-
-# a = {1:1, 2:2}
-# print(len(a))
-
-# nums = [1,2,3,4,5,6]
-# print(nums[-2:2])
+    return exclusive_times
 
 
-# a = "abc"
+n = 2
+logs = ["0:start:0","1:start:2","1:end:5","0:end:6"]
 
-# print(a[:5])
-
-
-# a = 3
-# b = a
-# a += 1
-# print(b)
-
-
-print(random.randint(1,3))
+print(exclusiveTime(n, logs))
