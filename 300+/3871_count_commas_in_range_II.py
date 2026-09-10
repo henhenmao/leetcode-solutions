@@ -30,6 +30,7 @@
   runtime: O(log(n)) solution iterates three digits at a time
   space: O(1)
 
+  solution also works for (https://leetcode.com/problems/count-commas-in-range/submissions/2136838274/?envType=daily-question&envId=2026-09-08)
 """
 def countCommas(n: int) -> int:
   if n < 1000:
