@@ -4,8 +4,6 @@ My personal collection of LeetCode solutions, written in mostly **Python** and *
 
 **my profile:** [leetcode.com/u/henhenmao](https://leetcode.com/u/henhenmao/)
 
-i am very proud of my solutions, please do not make fun of me 💔
-
 ---
 
 ## Organization
